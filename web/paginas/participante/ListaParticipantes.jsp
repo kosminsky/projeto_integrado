@@ -10,17 +10,17 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
 
     <title>Lista de Participantes</title>
     <%
-        ArrayList<Participante> participantes;
-
         try {
-            participantes = (ArrayList<Participante>) request.getAttribute("participantes");
+            ArrayList<Participante> participantes = (ArrayList<Participante>) request.getAttribute("participantes");
             pageContext.setAttribute("participantes", participantes);
+            boolean sucesso = (boolean)  request.getAttribute("sucesso");
+            pageContext.setAttribute("sucesso", sucesso);
         } catch (Exception e) {
             out.print("<h1>" + e.getMessage() + "</h1>");
         }
@@ -62,5 +62,8 @@
 
     <a href="${pageContext.request.contextPath}/participante/form"> Adicionar novo participante </a>
 
+    <c:if test = "${sucesso}">
+        <p><c:out value="Usuario cadastrado com sucesso"/><p>
+    </c:if>
 </body>
 </html>
